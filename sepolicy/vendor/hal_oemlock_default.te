@@ -1,6 +1,0 @@
-hal_server_domain(hal_oemlock_default, hal_oemlock)
-
-allow hal_oemlock_default hal_bootctl_socket:sock_file write;
-allow hal_oemlock_default hal_bootctl:unix_stream_socket connectto;
-
-init_daemon_domain(hal_oemlock_default)

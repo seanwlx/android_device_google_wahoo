@@ -67,7 +67,6 @@ TARGET_NEEDS_DTBOIMAGE := true
 
 # Partitions (listed in the file) to be wiped under recovery.
 TARGET_RECOVERY_WIPE := device/google/wahoo/recovery.wipe
-TARGET_RECOVERY_FSTAB := device/google/wahoo/fstab.hardware
 
 # Verified Boot
 BOARD_AVB_ENABLE := true
@@ -193,8 +192,4 @@ AB_OTA_PARTITIONS += \
 
 BUILD_BROKEN_ENFORCE_SYSPROP_OWNER := true
 
-# Allow Lineage config to override others
--include device/google/wahoo/BoardConfigLineage.mk
-
-# TWRP
-TW_THEME := portrait_hdpi
+-include device/google/wahoo/BoardConfigTWRP.mk

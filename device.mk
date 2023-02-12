@@ -45,7 +45,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PACKAGES += \
     messaging
 
-ifneq (,$(filter eng, $(TARGET_BUILD_VARIANT)))
+ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
 PRODUCT_PACKAGES += chre_test_client
 endif
 
@@ -92,7 +92,7 @@ else
     $(LOCAL_PATH)/init.hardware.xr.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/hw/init.$(PRODUCT_HARDWARE).rc
 endif
 
-ifneq (,$(filter eng, $(TARGET_BUILD_VARIANT)))
+ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
   PRODUCT_COPY_FILES += \
       $(LOCAL_PATH)/init.hardware.diag.rc.userdebug:$(TARGET_COPY_OUT_VENDOR)/etc/init/init.$(PRODUCT_HARDWARE).diag.rc
   PRODUCT_COPY_FILES += \
@@ -460,7 +460,7 @@ WPA := wpa_supplicant.conf
 WPA += wpa_supplicant
 PRODUCT_PACKAGES += $(WPA)
 
-ifneq (,$(filter eng, $(TARGET_BUILD_VARIANT)))
+ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
 PRODUCT_PACKAGES += wpa_cli
 endif
 
@@ -520,7 +520,7 @@ PRODUCT_COPY_FILES += \
 # PRODUCT_COPY_FILES += \
 #   frameworks/native/data/etc/android.hardware.audio.pro.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.audio.pro.xml
 
-ifneq (,$(filter eng, $(TARGET_BUILD_VARIANT)))
+ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
 PRODUCT_PACKAGES += \
     tinyplay \
     tinycap \
@@ -629,7 +629,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.device_id_attestation.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.device_id_attestation.xml
 
-ifneq (,$(filter eng, $(TARGET_BUILD_VARIANT)))
+ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
 # Subsystem ramdump
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.ssr.enable_ramdumps=1
@@ -649,7 +649,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     charger_res_images
 
-ifneq (,$(filter eng, $(TARGET_BUILD_VARIANT)))
+ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
 # b/36703476: Set default log size to 1M
 PRODUCT_PROPERTY_OVERRIDES += \
   ro.logd.size=1M
@@ -734,7 +734,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.camera.notify_nfc=1
 
 # default usb oem functions
-ifneq (,$(filter eng, $(TARGET_BUILD_VARIANT)))
+ifneq (,$(filter userdebug eng, $(TARGET_BUILD_VARIANT)))
   PRODUCT_PROPERTY_OVERRIDES += \
       persist.vendor.usb.usbradio.config=diag
 endif
@@ -800,7 +800,7 @@ PRODUCT_PACKAGES += \
     libhwbinder
 
 # Setting vendor SPL
-VENDOR_SECURITY_PATCH := "2020-10-05"
+VENDOR_SECURITY_PATCH := $(PLATFORM_SECURITY_PATCH)
 
 # Task profiles
 PRODUCT_COPY_FILES += \
@@ -813,3 +813,5 @@ include hardware/google/pixel/thermal/device.mk
 
 # power HAL
 -include hardware/google/pixel/power-libperfmgr/aidl/device.mk
+
+include $(LOCAL_PATH)/recovery/device-twrp.mk
